@@ -468,7 +468,8 @@ module TweetStream
       elsif hash[:friends]
         invoke_callback(callbacks['friends'], hash[:friends])
       elsif hash[:text] && hash[:user]
-        @last_status = Twitter::Tweet.new(hash)
+        @last_status = hash
+        #@last_status = Twitter::Tweet.new(hash)
         yield_message_to(callbacks['timeline_status'], @last_status)
 
         yield_message_to(block, @last_status) if block_given?
